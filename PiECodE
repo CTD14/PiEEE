@@ -1,0 +1,55 @@
+
+left_motor = "MOTOR ID HERE"
+right_motor = "MOTOR ID HERE"
+
+def autonomous_setup():
+    Robot.run(open_loop_drive)
+
+def autonomous_main():
+    pass
+
+ async def open_loop_drive():
+    #Drive forward for one second
+  Robot.set_value(left_motor, "duty_cycle", 1.0)
+  Robot.set_value(right_motor, "duty_cycle", 1.0)
+    await Actions.sleep(1.0)
+
+    #Turn right for one second
+  Robot.set_value(left_motor, "duty_cycle", 1.0)
+  Robot.set_value(right_motor, "duty_cycle", -1.0)
+    await Actions.sleep(0.5)
+
+    #Drive forward again
+  Robot.set_value(left_motor, "duty_cycle", 1.0)
+  Robot.set_value(right_motor, "duty_cycle", 1.0)
+    await Actions.sleep(0.5)
+
+     #Turn left for one second
+  Robot.set_value(left_motor, "duty_cycle", -1.0)
+  Robot.set_value(right_motor, "duty_cycle", 1.0)
+    await Actions.sleep(0.5)
+
+     #Move backwards for one second
+  Robot.set_value(left_motor, "duty_cycle", -1.0)
+  Robot.set_value(right_motor, "duty_cycle", -1.0)
+    await Actions.sleep(0.5)
+
+     #Stop
+  Robot.set_value(left_motor, "duty_cycle", 0.0)
+  Robot.set_value(right_motor, "duty_cycle", 0.0)
+
+def teleop_setup():
+	 print("Tele-operated mode has started")
+
+def teleop_main():
+     def teleop_main():
+    if Gamepad.get_value("joystick_left_y") > 0.5:
+       Gamepad.get_value("joystick_right_y") > 0.5:
+        Robot.set_value(left_motor, "duty_cycle", -1.0)
+        Robot.set_value(right_motor, "duty_cycle", -1.0)
+    else:
+        Robot.set_value(left_motor, "duty_cycle", 0)
+        Robot.set_value(right_motor, "duty_cycle", 0)
+
+
+
